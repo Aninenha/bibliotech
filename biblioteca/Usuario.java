@@ -13,6 +13,7 @@ public class Usuario {
     int numEmp;
     Tipo tipo;
     double multa;
+    Livro pegou = null;
     List<String> histEmpr = new ArrayList<>();
     public Usuario(String nome, int cpf, Tipo tipo){
         setNome(nome);
