@@ -1,7 +1,11 @@
 package Biblioteca;
 
+
+
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
+import java.util.Scanner;
 
 public class Biblioteca {
     public static void main(String[] args) {
@@ -12,16 +16,26 @@ public class Biblioteca {
         l.emprestado();
         Emprestimo emprestimo = new Emprestimo(u,l);
         u.addEmpr();
-        u.histEmpr.add(u.numEmp+"- Livro: "+l.getTitulo()+".Autor: "+l.getAutor()+".\nData de emprestimo: "+emprestimo.emprestimo+" | Data de devolução: "+emprestimo.devolucao);
+        u.histEmpr.add(u.numEmp+"- Livro: "+l.getTitulo()+".Autor: "+l.getAutor()+".\nData de emprestimo: "+emprestimo.getEmprestimo()+" | Data de devolução: "+emprestimo.getDevolucao());
+        l.setEmprestadoPor(u);
+    }
+
+    public void devolver(Usuario u, Livro l){
+        l.getEmprestadoPor();
+        l.devolvidoPor(u);
     }
 
     public void multa(Emprestimo emprestimo, Usuario usuario){
-        if (LocalDate.now().isAfter(emprestimo.emprestimo)){
-            usuario.multa= ChronoUnit.DAYS.between(LocalDate.now(),emprestimo.emprestimo)*1.2;
+        if (LocalDate.now().isAfter(emprestimo.getEmprestimo())){
+            usuario.multa= ChronoUnit.DAYS.between(LocalDate.now(),emprestimo.getEmprestimo())*1.2;
         }
     }
 
-        public static void menuInterativo(){
+    public void cadastrarLivro(){
+        
+    }
+
+    public static void menuInterativo(){
 
 
 
@@ -47,8 +61,8 @@ public class Biblioteca {
 
                     break;
                 case(6):
-                    System.out.println("\n=== CAIXA ELETRONICO ===");
-                    System.out.println("Titular: " + c.getTitular());
+                    System.out.println("\n=== Biblioteca Pública ===");
+                    System.out.println("Digite o número segundo a ação que deseja realizar:");
                     System.out.println("1 - Cadastrar Livro");
                     System.out.println("2 - Cadastrar Usuário");
                     System.out.println("3 - Emprestar Livro");
@@ -64,8 +78,9 @@ public class Biblioteca {
             }
             x = sc.nextInt();
         }
-        
+
         sc.close();
     }
 
 }
+
