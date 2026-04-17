@@ -1,14 +1,27 @@
 package Biblioteca;
 
 public class Categoria {
-    String nome;
+    enum Nome{
+        romance,
+        poesia,
+        conto,
+        cronica,
+        drama,
+        fabula,
+        ensaio,
+        biografia,
+        autobiografia,
+        fantasia
+    };
     int id;
-    public Categoria(String nome, int id){
+    public Categoria(Nome nome, int id){
         setNome(nome);
         setId(id);
     }
 
-    public void setNome(String nome) {
+    Nome nome;
+
+    public void setNome(Nome nome) {
         this.nome = nome;
     }
 
@@ -16,7 +29,7 @@ public class Categoria {
         this.id = id;
     }
 
-    public String getNome() {
+    public Nome getNome() {
         return nome;
     }
 
@@ -24,3 +37,4 @@ public class Categoria {
         return id;
     }
 }
+
