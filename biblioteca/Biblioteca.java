@@ -21,5 +21,51 @@ public class Biblioteca {
         }
     }
 
-    
+        public static void menuInterativo(){
+
+
+
+        Scanner sc = new Scanner(System.in);
+        int x = 6;
+        double valor;
+        while (x != 0) {
+
+            switch (x) {
+                case (1):
+
+                    break;
+                case (2):
+
+                    break;
+                case (3):
+
+                    break;
+                case(4):
+
+                    break;
+                case(5):
+
+                    break;
+                case(6):
+                    System.out.println("\n=== CAIXA ELETRONICO ===");
+                    System.out.println("Titular: " + c.getTitular());
+                    System.out.println("1 - Cadastrar Livro");
+                    System.out.println("2 - Cadastrar Usuário");
+                    System.out.println("3 - Emprestar Livro");
+                    System.out.println("4 - Devolver Livro");
+                    System.out.println("5 - Listar Livros");
+                    System.out.println("6 - Voltar ao Menu");
+                    System.out.println("0 - Sair");
+                    break;
+
+                default:
+                    System.out.println("Opção inválida.");
+                    break;
+            }
+            x = sc.nextInt();
+        }
+        
+        sc.close();
+    }
+
 }
