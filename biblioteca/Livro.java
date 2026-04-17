@@ -8,6 +8,7 @@ public class Livro {
     private Categoria categoria;
     private int ano;
     private int id;
+    private Usuario emprestadoPor = null;
     enum Status {
         disponivel,
         emprestado
@@ -21,6 +22,25 @@ public class Livro {
         setAno(ano);
         setId(id);
         disponivel();
+    }
+
+    public void setEmprestadoPor(Usuario emprestadoPor) {
+        this.emprestadoPor = emprestadoPor;
+    }
+
+    public void devolvidoPor(Usuario usuario){
+        if (usuario!=getEmprestadoPor()){
+            throw new IllegalArgumentException("Este livro não foi emprestado por este usuário.");
+        } else {
+            emprestadoPor = null;
+        }
+    }
+
+    public Usuario getEmprestadoPor() {
+        if (emprestadoPor==null){
+            throw new IllegalArgumentException("Livro está disponível");
+        }
+        return emprestadoPor;
     }
 
     public void setId(int id) {
