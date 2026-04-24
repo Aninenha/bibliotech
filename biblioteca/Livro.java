@@ -1,7 +1,5 @@
 package Biblioteca;
 
-import java.time.LocalDate;
-
 public class Livro {
     private String titulo;
     private String autor;
@@ -12,7 +10,7 @@ public class Livro {
     enum Status {
         disponivel,
         emprestado
-    };
+    }
     Status status;
 
     public Livro (String titulo, Categoria categoria, String autor, int ano, int id){
