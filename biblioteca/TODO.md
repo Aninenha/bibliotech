@@ -1,19 +1,15 @@
-() Criar menu interativo
-<br>
-() Implementar busca de livros por nome
-<br>
-() Criar lista de livros emprestados por usuário
-<br>
-() Trabalhar com Arraylist ao invés de array simples
-<br>
-() Validar entradas do usuário
-<br>
-() Salvar dados em arquivo
-<br>
-() Implementar doação de livros
-<br>
-() Listar livros por categoria
-<br>
-() Listar livros por autor
-<br>
-() Listar empréstimos por livro
+- [x] Trabalhar com Arraylist ao invés de array simples
+- [x] Busca de livro por id
+- [x] Busca de usuario por cpf
+- [x] Cadastro de usuario
+- [ ] Corrigir o menu interativo (Cadastrar livro)
+- [ ] Testar demais funções do menu interativo
+- [ ] Implementar doação de livros
+- [ ] Listar empréstimos por livro
+- [ ] Listar livros por autor
+- [ ] Listar livros por categoria
+- [ ] Implementar busca de livros por nome
+- [ ] Criar lista de livros emprestados por usuário
+- [ ] Criar menu interativo
+- [ ] Salvar dados em arquivo
+- [ ] Validar entradas do usuário
