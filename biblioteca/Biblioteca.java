@@ -25,6 +25,12 @@ public class Biblioteca {
         Livro livro4 = new Livro("Sherlock Holmes: Um Estudo em Vermelho", catPolicial, "Arthur Conan Doyle", 1887, 4);
         Livro livro5 = new Livro("O Senhor dos Anéis", catFantasia, "J.R.R. Tolkien", 1954, 5);
         Livro livro6 = new Livro("Steve Jobs", catBiografia, "Walter Isaacson", 2011, 6);
+        l.add(livro1);
+        l.add(livro2);
+        l.add(livro3);
+        l.add(livro4);
+        l.add(livro5);
+        l.add(livro6);
         menuInterativo();
     }
     public static void emprestar(Usuario u, Livro l){
@@ -79,6 +85,7 @@ public class Biblioteca {
     public static void cadastrarLivro(){
         System.out.println("Escolha a categoria do livro a ser cadastrado:");
         Categoria.Nome n = Categoria.retornarCategoria();
+        Scanner sc = new Scanner(System.in);
         if (n == null){
             System.out.println("Cadastro cancelado.");
         } else {
@@ -87,7 +94,6 @@ public class Biblioteca {
             String autor;
             int ano;
             int id;
-            Scanner sc = new Scanner(System.in);
             System.out.println("Qual o título do livro?");
             nome = sc.nextLine();
             System.out.println("Insira o nome do autor:");
@@ -114,11 +120,12 @@ public class Biblioteca {
             System.out.println("CPF já cadastrado. Corrija o CPF ou faça login como usuário já existente:");
             cpf =sc.nextInt();
         }
+        sc.nextLine();
         System.out.println("Qual o nome do usuário?");
         String nome = sc.nextLine();
         Usuario usuario = new Usuario(nome, cpf, tipo);
         u.add(usuario);
-        sc.close();
+        System.out.println("Usuário " + usuario.getNome() + " de tipo "+usuario.getTipo()+" criado com sucesso.");
     }
 
 
@@ -126,19 +133,28 @@ public class Biblioteca {
 
 
 
+        int x;
         Scanner sc = new Scanner(System.in);
-        int x = 6;
         double valor;
-        while (x != 0) {
+        do {
             int cpf;
             int id;
             Livro livro;
             Usuario usuario;
+            System.out.println("\n=== Biblioteca Pública ===");
+            System.out.println("Digite o número segundo a ação que deseja realizar:");
+            System.out.println("1 - Cadastrar Livro");
+            System.out.println("2 - Cadastrar Usuário");
+            System.out.println("3 - Emprestar Livro");
+            System.out.println("4 - Devolver Livro");
+            System.out.println("5 - Listar Livros");
+            System.out.println("6 - Voltar ao Menu");
+            System.out.println("0 - Sair");
+            x = sc.nextInt();
 
             switch (x) {
                 case (1):
                     cadastrarLivro();
-                    x =6;
                     break;
                 case (2):
                     cadastrarUsuario();
@@ -186,11 +202,10 @@ public class Biblioteca {
                     System.out.println("Opção inválida.");
                     break;
             }
-            x = sc.nextInt();
-        }
+
+        }  while (x != 0);
 
         sc.close();
     }
 
 }
-
