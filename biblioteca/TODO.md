@@ -2,12 +2,14 @@
 - [x] Busca de livro por id
 - [x] Busca de usuario por cpf
 - [x] Cadastro de usuario
-- [ ] Corrigir o menu interativo (Cadastrar livro)
-- [ ] Testar demais funções do menu interativo
+- [x] Corrigir o menu interativo (Cadastrar livro)
+- [x] Testar demais funções do menu interativo
 - [ ] Implementar doação de livros
 - [ ] Listar empréstimos por livro
 - [ ] Listar livros por autor
 - [ ] Listar livros por categoria
+- [ ] Listar livros emprestados do usuário
+- [ ] Mostrar quantos livros o usuário pegou
 - [ ] Implementar busca de livros por nome
 - [ ] Criar lista de livros emprestados por usuário
 - [ ] Criar menu interativo
