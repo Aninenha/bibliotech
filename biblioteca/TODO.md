@@ -4,10 +4,17 @@
 - [x] Cadastro de usuario
 - [x] Corrigir o menu interativo (Cadastrar livro)
 - [x] Testar demais funções do menu interativo
+- [ ] Verificar pendencias (multas e empréstimos) do usuário
+- [ ] procurar livros por id
+- [ ] Criar tipo de usuario staff (funcionário)
+- [ ] Listar emprestimos
+- [ ] Procurar empréstimo por id de livro
+- [ ] Procurar empréstimo por cpf
 - [ ] Implementar doação de livros
 - [ ] Listar empréstimos por livro
 - [ ] Listar livros por autor
 - [ ] Listar livros por categoria
+- [ ] listar livros por ano
 - [ ] Listar livros emprestados do usuário
 - [ ] Mostrar quantos livros o usuário pegou
 - [ ] Implementar busca de livros por nome
@@ -15,3 +22,13 @@
 - [ ] Criar menu interativo
 - [ ] Salvar dados em arquivo
 - [ ] Validar entradas do usuário
+- [ ] Adicionar menu exclusivo a tipo de funcionario
+- [ ] Adicionar funções específicas para usuário tipo aluno (validação por cpf e senha)
+- [ ] Adicionar funções especificas para usuário tipo professor (validação por cpf e senha)
+- [ ] Adicinar funções específicas para usuário tipo staff (validação por cpf e senha)
+- [ ] listar usuarios por tipo (exclusivo staff)
+- [ ] criar lista de turmas de usuarios (exclusivo professor)
+- [ ] listar usuarios tipo aluno (exclusivo professor & staff)
+- [ ] listar usuarios tipo professor
+- [ ] listar usuarios tipo staff (exclusivo staff)
+- [ ] listar usuarios de turma (exclusivo professor)
