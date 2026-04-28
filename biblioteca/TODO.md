@@ -4,6 +4,7 @@
 - [x] Cadastro de usuario
 - [x] Corrigir o menu interativo (Cadastrar livro)
 - [x] Testar demais funções do menu interativo
+- [x] Listar empréstimos do usuário
 - [ ] Verificar pendencias (multas e empréstimos) do usuário
 - [ ] procurar livros por id
 - [ ] Criar tipo de usuario staff (funcionário)
