@@ -18,17 +18,13 @@ public class Categoria {
     public Categoria(Nome nome){
         setNome(nome);
     }
-
     Nome nome;
-
     public void setNome(Nome nome) {
         this.nome = nome;
     }
-
     public Nome getNome() {
         return nome;
     }
-
     public static Nome retornarCategoria(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Selecione o gênero do livro:");
