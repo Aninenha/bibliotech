@@ -1,14 +1,10 @@
 package Biblioteca;
-
-
-
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Biblioteca {
+    static List<Emprestimo> e = new ArrayList<>();
     static List<Livro> l = new ArrayList<>();
     static List<Usuario> u = new ArrayList<>();
     public static void main(String[] args) {
@@ -31,26 +27,52 @@ public class Biblioteca {
         l.add(livro4);
         l.add(livro5);
         l.add(livro6);
+
+        Usuario usuario1 = new Usuario("Ana",1, Usuario.Tipo.aluno);
+        Usuario usuario2 = new Usuario("Davi",2, Usuario.Tipo.aluno);
+        Usuario usuario3 = new Usuario("Miguel",3, Usuario.Tipo.professor);
+        u.add(usuario1);
+        u.add(usuario2);
+        u.add(usuario3);
+
+        emprestar(usuario1,livro1);
+
         menuInterativo();
     }
     public static void emprestar(Usuario u, Livro l){
         l.isDisponivel();
         l.emprestado();
         Emprestimo emprestimo = new Emprestimo(u,l);
+        e.add(emprestimo);
         u.addEmpr();
-        u.histEmpr.add(u.numEmp+"- Livro: "+l.getTitulo()+".Autor: "+l.getAutor()+".\nData de emprestimo: "+emprestimo.getEmprestimo()+" | Data de devolução: "+emprestimo.getDevolucao());
+        String nota = u.numEmp+"- Livro: "+l.getTitulo()+".Autor: "+l.getAutor()+".\nData de emprestimo: "+emprestimo.getEmprestimo()+" | Data de devolução: "+emprestimo.getDevolucao();
+        u.histEmpr.add(nota);
+        System.out.println(nota);
         l.setEmprestadoPor(u);
+        System.out.println("Livro "+ l.getTitulo() + " emprestado por "+ l.getEmprestadoPor().getNome());
     }
-
     public static void devolver(Usuario u, Livro l){
-        l.getEmprestadoPor();
-        l.devolvidoPor(u);
-    }
-
-    public void multa(Emprestimo emprestimo, Usuario usuario){
-        if (LocalDate.now().isAfter(emprestimo.getEmprestimo())){
-            usuario.multa= ChronoUnit.DAYS.between(LocalDate.now(),emprestimo.getEmprestimo())*1.2;
+        if(l.getEmprestadoPor()!=null) {
+            l.devolvidoPor(u);
+            l.isDisponivel();
+            int cpf = u.getCpf();
+            int id = l.getId();
+            Emprestimo emp = empPorCpfEId(cpf,id);
+            emp.devolvido();
+        } else {
+            System.out.println("Livro não foi emprestado");
         }
+    }
+    public static Emprestimo empPorCpfEId(int cpf, int id){
+        Emprestimo emp = null;
+        for (Emprestimo e : e){
+            if (e.getCpf_usuario()==cpf){
+                if(e.getId_livro()==id){
+                    emp = e;
+                }
+            }
+        }
+        return emp;
     }
     public static Livro livroPorId(int id){
         Livro livro = null;
@@ -70,7 +92,6 @@ public class Biblioteca {
         }
         return usuario;
     }
-
     public static void existsByCpf(int cpf){
         if (userPorCpf(cpf)==null){
             throw new IllegalArgumentException("Usuário não existe");
@@ -81,7 +102,17 @@ public class Biblioteca {
             throw new IllegalArgumentException("Livro não existe");
         }
     }
-
+    public static void emprestimosDoUsuario(Usuario u){
+        for (Emprestimo e: e){
+            if (e.getCpf_usuario()==u.getCpf()){
+                if (e.getStatus()== Emprestimo.Status.devolvido){
+                    System.out.println("Livro "+livroPorId(e.getId_livro()).getTitulo()+ " | Status: Devolvido.");
+                } else {
+                    System.out.println("Livro "+livroPorId(e.getId_livro()).getTitulo()+ " | Status: Pendente.");
+                }
+            }
+        }
+    }
     public static void cadastrarLivro(){
         System.out.println("Escolha a categoria do livro a ser cadastrado:");
         Categoria.Nome n = Categoria.retornarCategoria();
@@ -113,29 +144,30 @@ public class Biblioteca {
 
     public static void cadastrarUsuario(){
         Usuario.Tipo tipo = Usuario.retornarTipo();
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Digite o cpf do usuário:");
-        int cpf = sc.nextInt();
-        while (userPorCpf(cpf)!=null){
-            System.out.println("CPF já cadastrado. Corrija o CPF ou faça login como usuário já existente:");
-            cpf =sc.nextInt();
+        if (tipo!=null) {
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Digite o cpf do usuário:");
+            int cpf = sc.nextInt();
+            while (userPorCpf(cpf) != null) {
+                System.out.println("CPF já cadastrado. Corrija o CPF ou faça login como usuário já existente:");
+                cpf = sc.nextInt();
+            }
+            sc.nextLine();
+            System.out.println("Qual o nome do usuário?");
+            String nome = sc.nextLine();
+            Usuario usuario = new Usuario(nome, cpf, tipo);
+            u.add(usuario);
+            System.out.println("Usuário " + usuario.getNome() + " de tipo " + usuario.getTipo() + " criado com sucesso.");
+        } else {
+            System.out.println("Cadastro cancelado.");
         }
-        sc.nextLine();
-        System.out.println("Qual o nome do usuário?");
-        String nome = sc.nextLine();
-        Usuario usuario = new Usuario(nome, cpf, tipo);
-        u.add(usuario);
-        System.out.println("Usuário " + usuario.getNome() + " de tipo "+usuario.getTipo()+" criado com sucesso.");
     }
-
 
     public static void menuInterativo(){
 
-
-
-        int x;
         Scanner sc = new Scanner(System.in);
-        double valor;
+        int x;
+
         do {
             int cpf;
             int id;
@@ -148,7 +180,7 @@ public class Biblioteca {
             System.out.println("3 - Emprestar Livro");
             System.out.println("4 - Devolver Livro");
             System.out.println("5 - Listar Livros");
-            System.out.println("6 - Voltar ao Menu");
+            System.out.println("6 - Consultar Empréstimos");
             System.out.println("0 - Sair");
             x = sc.nextInt();
 
@@ -187,15 +219,10 @@ public class Biblioteca {
                     }
                     break;
                 case(6):
-                    System.out.println("\n=== Biblioteca Pública ===");
-                    System.out.println("Digite o número segundo a ação que deseja realizar:");
-                    System.out.println("1 - Cadastrar Livro");
-                    System.out.println("2 - Cadastrar Usuário");
-                    System.out.println("3 - Emprestar Livro");
-                    System.out.println("4 - Devolver Livro");
-                    System.out.println("5 - Listar Livros");
-                    System.out.println("6 - Voltar ao Menu");
-                    System.out.println("0 - Sair");
+                    Usuario u;
+                    System.out.println("Digite o cpf do usuario: ");
+                    u = userPorCpf(sc.nextInt());
+                    emprestimosDoUsuario(u);
                     break;
 
                 default:
@@ -207,5 +234,4 @@ public class Biblioteca {
 
         sc.close();
     }
-
 }
