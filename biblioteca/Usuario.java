@@ -23,43 +23,33 @@ public class Usuario {
         histEmpr.add("Histórico de empréstimos de livros de "+getNome());
         setNumEmp(0);
     }
-
     public int getNumEmp() {
         return numEmp;
     }
-
     public void setNumEmp(int numEmp) {
         this.numEmp = numEmp;
     }
-
     public void addEmpr(){
         setNumEmp(getNumEmp()+1);
     }
-
     public String getNome() {
         return nome;
     }
-
     public int getCpf() {
         return cpf;
     }
-
     public Tipo getTipo() {
         return tipo;
     }
-
     public void setNome(String nome) {
         this.nome = nome;
     }
-
     public void setCpf(int cpf) {
         this.cpf = cpf;
     }
-
     public void setTipo(Tipo tipo) {
         this.tipo = tipo;
     }
-
     public static Tipo retornarTipo(){
         Tipo t = null;
         Scanner sc = new Scanner(System.in);
